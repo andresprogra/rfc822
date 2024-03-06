@@ -1,11 +1,10 @@
 module RFC822
-  QTEXT = '[^\\x0d\\x22\\x5c\\x80-\\xff]'
-  DTEXT = '[^\\x0d\\x5b-\\x5d\\x80-\\xff]'
-  ATOM = '[^\\x00-\\x20\\x22\\x28\\x29\\x2c\\x2e\\x3a-' +
-    '\\x3c\\x3e\\x40\\x5b-\\x5d\\x7f-\\xff]+'
-  QUOTED_PAIR = '\\x5c[\\x00-\\x7f]'
-  DOMAIN_LITERAL = "\\x5b(?:#{DTEXT}|#{QUOTED_PAIR})*\\x5d"
-  QUOTED_STRING = "\\x22(?:#{QTEXT}|#{QUOTED_PAIR})*\\x22"
+  QTEXT = '[^\u000d\u0022\u005c\u0080-\u00ff]'
+  DTEXT = '[^\u000d\u005b-\u005d\u0080-\u00ff]'
+  ATOM = '[^\u0000-\u0020\u0022\u0028\u0029\u002c\u002e\u003a-\u003c\u003e\u0040\u005b-\u005d\u007f-\u00ff]+'
+  QUOTED_PAIR = '\u005c[\u0000-\u007f]'
+  DOMAIN_LITERAL = "\u005b(?:#{DTEXT}|#{QUOTED_PAIR})*\u005d"
+  QUOTED_STRING = "\u0022(?:#{QTEXT}|#{QUOTED_PAIR})*\u0022"
   DOMAIN_REF = ATOM
   SUB_DOMAIN = "(?:#{DOMAIN_REF}|#{DOMAIN_LITERAL})"
   WORD = "(?:#{ATOM}|#{QUOTED_STRING})"
@@ -13,8 +12,10 @@ module RFC822
   LOCAL_PART = "#{WORD}(?:\\x2e#{WORD})*"
   ADDR_SPEC = "#{LOCAL_PART}\\x40#{DOMAIN}"
 
-  EMAIL_REGEXP_WHOLE = Regexp.new("\\A#{ADDR_SPEC}\\z", nil, 'n')
-  EMAIL_REGEXP_PART = Regexp.new("#{ADDR_SPEC}", nil, 'n')
+  EMAIL_REGEXP_WHOLE = /\A#{ADDR_SPEC}\z/i
+
+  EMAIL_REGEXP_PART = /#{ADDR_SPEC}/i
+
 end
 
 class String
