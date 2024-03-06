@@ -3,7 +3,7 @@
 require 'jeweler'
 Jeweler::Tasks.new do |s|
   s.name = "rfc822"
-  s.version = '0.1.5'
+  s.version = '0.1.6'
   s.authors = ["Marcin Lewandowski", "Artur Trzop"]
   s.email = ["marcin@saepia.net"]
   s.summary = %q{This is a simple gem for Ruby that simplifies validating email addresses.}
